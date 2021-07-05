@@ -5,7 +5,7 @@ from threading import Thread
 from time import sleep
 import json
 
-bot = telebot.TeleBot('1272768885:AAGFEXTVQbHNiAUACTUGmKlX1aqZIJ67oIk')
+bot = telebot.TeleBot('1802866369:AAFCPMP1huS_apbw44lukzr985UsFAt2Hmo')
 
 
 def check_free_time(page):
@@ -18,7 +18,7 @@ def check_free_time(page):
         print('Сервер не отвечает')
         return
     parser = BeautifulSoup(request.text, 'html.parser')
-    return len(parser.select('.free')) != 0
+    return len(parser.select('.error')) == 0
 
 
 def bot_pool():
@@ -57,7 +57,7 @@ def bot_pool():
 def check_page():
     global bot
     while True:
-        if check_free_time('https://reg.zdrav10.ru/service/schedule/27463/timetable'):
+        if check_free_time('http://portal.guap.ru/?n=priem&p=pr2021_exam_results'):
             print('time')
             with open('info.json', 'r', encoding='utf-8') as f:
                 info = json.load(f)
@@ -66,7 +66,7 @@ def check_page():
             info['handlers'] = []
             with open('info.json', 'w', encoding='utf-8') as f:
                 json.dump(info, f)
-        sleep(1200)
+        sleep(300)
 
 
 def main():
